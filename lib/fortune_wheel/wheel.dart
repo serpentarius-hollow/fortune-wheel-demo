@@ -6,10 +6,12 @@ import 'item_prize.dart';
 
 class Wheel extends StatefulWidget {
   final List<ItemPrize> items;
+  final Size size;
 
   const Wheel({
     Key key,
     this.items,
+    this.size,
   }) : super(key: key);
 
   @override
@@ -17,19 +19,14 @@ class Wheel extends StatefulWidget {
 }
 
 class _WheelState extends State<Wheel> {
-  Size get size => Size(
-        MediaQuery.of(context).size.width * 0.8,
-        MediaQuery.of(context).size.width * 0.8,
-      );
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
       children: [
         Container(
-          height: size.height,
-          width: size.width,
+          height: widget.size.height,
+          width: widget.size.width,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             boxShadow: [BoxShadow(blurRadius: 20, color: Colors.black38)],
@@ -61,8 +58,8 @@ class _WheelState extends State<Wheel> {
       child: ClipPath(
         clipper: ArcPath(_angle),
         child: Container(
-          height: size.height,
-          width: size.width,
+          height: widget.size.height,
+          width: widget.size.width,
           child: Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Align(

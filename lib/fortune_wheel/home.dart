@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'item_prize.dart';
+import 'spinning_wheel.dart';
 import 'wheel.dart';
 
 class Home extends StatefulWidget {
@@ -8,12 +9,7 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
-  Size get size => Size(
-        MediaQuery.of(context).size.width,
-        MediaQuery.of(context).size.height,
-      );
-
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final List<ItemPrize> _items = [
     ItemPrize("100", Colors.redAccent),
     ItemPrize("200", Colors.orangeAccent),
@@ -33,26 +29,22 @@ class _HomeState extends State<Home> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Container(
-          height: size.height,
-          width: size.width,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Wheel(
-                  items: _items,
-                ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SpinningWheel(
+              Wheel(
+                items: _items,
+                size: Size(300, 300),
               ),
-              Container(
-                width: size.width,
-                child: RaisedButton(
-                  child: Text('Spin!'),
-                  onPressed: () {},
-                ),
-              )
-            ],
-          ),
+              size: Size(300, 300),
+              dividers: 6,
+              onUpdate: () {
+                // TODO: update selected index of items
+              },
+            ),
+          ],
         ),
       ),
     );
