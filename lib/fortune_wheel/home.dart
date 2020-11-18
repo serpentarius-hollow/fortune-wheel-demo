@@ -40,7 +40,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ),
               size: Size(300, 300),
               dividers: 6,
-              onUpdate: () {
+              onUpdate: (index) {
                 // TODO: update selected index of items
               },
             ),
