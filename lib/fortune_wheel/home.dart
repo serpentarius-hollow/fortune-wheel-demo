@@ -11,13 +11,14 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   final List<ItemPrize> _items = [
-    ItemPrize("100", Colors.redAccent),
-    ItemPrize("200", Colors.orangeAccent),
-    ItemPrize("300", Colors.yellowAccent),
-    ItemPrize("400", Colors.greenAccent),
-    ItemPrize("500", Colors.blueAccent),
-    ItemPrize("600", Colors.indigoAccent),
-    ItemPrize("700", Colors.purpleAccent),
+    ItemPrize("1000\$", Colors.redAccent),
+    ItemPrize("400\$", Colors.orangeAccent),
+    ItemPrize("800\$", Colors.yellowAccent),
+    ItemPrize("7000\$", Colors.greenAccent),
+    ItemPrize("5000\$", Colors.blueAccent),
+    ItemPrize("300\$", Colors.indigoAccent),
+    ItemPrize("2000\$", Colors.purpleAccent),
+    ItemPrize("100\$", Colors.amberAccent),
   ];
 
   @override
@@ -34,12 +35,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SpinningWheel(
-              Wheel(
-                items: _items,
-                size: Size(300, 300),
-              ),
+              // Wheel(
+              //   items: _items,
+              //   size: Size(300, 300),
+              // ),
+              Image.asset('assets/images/rolet.png'),
               size: Size(300, 300),
-              dividers: 7,
+              dividers: 8,
               onUpdate: (index) {},
               list: _items,
               secondaryImage: Image.asset('assets/images/arrow.png'),
