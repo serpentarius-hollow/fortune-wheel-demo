@@ -1,7 +1,8 @@
+
 import 'package:flutter/material.dart';
 
+import 'item_prize.dart';
 import 'spin_velocity.dart';
-
 
 class SpinningWheel extends StatefulWidget {
   final Size size;
@@ -11,16 +12,16 @@ class SpinningWheel extends StatefulWidget {
   final double secondaryImageHeight;
   final double secondaryImageWidth;
   final Function(int index) onUpdate;
+  final List<ItemPrize> list;
 
-  SpinningWheel(
-    this.image, {
-    @required this.size,
-    @required this.dividers,
-    this.secondaryImage,
-    this.secondaryImageHeight,
-    this.secondaryImageWidth,
-    this.onUpdate,
-  });
+  SpinningWheel(this.image,
+      {@required this.size,
+      @required this.dividers,
+      this.secondaryImage,
+      this.secondaryImageHeight,
+      this.secondaryImageWidth,
+      this.onUpdate,
+      this.list});
 
   @override
   _SpinningWheelState createState() => _SpinningWheelState();
@@ -48,7 +49,8 @@ class _SpinningWheelState extends State<SpinningWheel>
   void initState() {
     super.initState();
 
-    _spinVelocity = SpinVelocity(width: widget.size.width, height: widget.size.height);
+    _spinVelocity =
+        SpinVelocity(width: widget.size.width, height: widget.size.height);
     _motion = NonUniformCircularMotion(resistance: 0.5);
     _dividerAngle = _motion.anglePerDivision(widget.dividers);
 
@@ -66,7 +68,8 @@ class _SpinningWheelState extends State<SpinningWheel>
   double get leftSecondaryImage =>
       (widget.size.width / 2) - (widget.secondaryImageWidth / 2);
 
-  double get widthSecondaryImage => widget.secondaryImageWidth ?? widget.size.width;
+  double get widthSecondaryImage =>
+      widget.secondaryImageWidth ?? widget.size.width;
 
   double get heightSecondaryImage =>
       widget.secondaryImageHeight ?? widget.size.height;
@@ -75,7 +78,7 @@ class _SpinningWheelState extends State<SpinningWheel>
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-        height: widget.size.height,
+        height: widget.size.height + 200,
         width: widget.size.width,
         child: Stack(
           children: <Widget>[
@@ -84,13 +87,24 @@ class _SpinningWheelState extends State<SpinningWheel>
               onPanEnd: _startAnimation,
               child: AnimatedBuilder(
                   animation: _animation,
-                  child: Container(child: widget.image),
                   builder: (context, child) {
                     _updateAnimationValues();
-                    widget.onUpdate?.call(_currentDivider);
-                    return Transform.rotate(
-                      angle: _initialSpinAngle + _currentDistance,
-                      child: child,
+                    widget.onUpdate?.call(
+                        _currentDivider);
+                    return Column(
+                      children: [
+                        Transform.rotate(
+                          angle: _initialSpinAngle + _currentDistance,
+                          child: Container(child: widget.image),
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),Text(
+                          widget.list[_currentDivider - 1].name,
+                          style: TextStyle(
+                              fontSize: 35, fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     );
                   }),
             ),

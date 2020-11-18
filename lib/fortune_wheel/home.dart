@@ -40,9 +40,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ),
               size: Size(300, 300),
               dividers: 7,
-              onUpdate: (index) {
-                // TODO: update selected index of items
-              },
+              onUpdate: (index) {},
+              list: _items,
+              secondaryImage: Image.asset('assets/images/arrow.png'),
+              secondaryImageHeight: 120,
+              secondaryImageWidth: 120,
             ),
           ],
         ),
