@@ -10,7 +10,7 @@ class SpinningWheel extends StatefulWidget {
   final Image secondaryImage;
   final double secondaryImageHeight;
   final double secondaryImageWidth;
-  final Function onUpdate;
+  final Function(int index) onUpdate;
 
   SpinningWheel(
     this.image, {
@@ -87,7 +87,7 @@ class _SpinningWheelState extends State<SpinningWheel>
                   child: Container(child: widget.image),
                   builder: (context, child) {
                     _updateAnimationValues();
-                    widget.onUpdate?.call(widget.onUpdate(_currentDivider));
+                    widget.onUpdate?.call(_currentDivider);
                     return Transform.rotate(
                       angle: _initialSpinAngle + _currentDistance,
                       child: child,
